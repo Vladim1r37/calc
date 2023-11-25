@@ -124,19 +124,19 @@ func compute(s1 string, op string, s2 string) error {
 			return errors.New("Ошибка вычисления, результат не может быть меньше 1")
 		}
 		strRoman := ""
-		for i := len(strRes); i > 0; i-- {
-			if i == 3 {
-				strRoman += "C"
-				break
-			}
-			if i == 2 {
-				index, _ := strconv.Atoi(string(strRes[0]))
-				strRoman += romanNums2[index]
-			}
-			if i == 1 {
-				index, _ := strconv.Atoi(string(strRes[1]))
-				strRoman += romanNums2[index]
-			}
+		switch len(strRes) {
+		case 3:
+			strRoman = "C"
+
+		case 2:
+			index, _ := strconv.Atoi(string((strRes[0])))
+			strRoman = romanNums2[index]
+			index, _ = strconv.Atoi(string((strRes[1])))
+			strRoman += romanNums1[index]
+
+		case 1:
+			index, _ := strconv.Atoi(string((strRes[0])))
+			strRoman = romanNums1[index]
 		}
 		fmt.Println(strRoman)
 	} else {
